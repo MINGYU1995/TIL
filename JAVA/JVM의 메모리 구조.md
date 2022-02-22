@@ -82,9 +82,10 @@ main() : x = 10
 change() : x = 1000  
 After change(d.x)  
 main() : x = 10  
-  
-  
+ 
  ---
+ 메서드로 배열을 다루는 여러가지 방법이 존재한다.
+ 
 ```java
 class MyMathTest3 {
 	public static void main(String[] args) {
