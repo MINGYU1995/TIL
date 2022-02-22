@@ -77,9 +77,9 @@ static void change(int x) {  // 기본형 매개변수
 	}
 }
 ```
-컴파일결과:
-main() : x = 10
-change() : x = 1000
-After change(d.x)
-main() : x = 10
+컴파일결과:  
+main() : x = 10  
+change() : x = 1000  
+After change(d.x)  
+main() : x = 10  
 
