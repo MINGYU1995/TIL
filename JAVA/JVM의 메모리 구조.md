@@ -42,11 +42,13 @@ class CallStackTest2 {
 	}
 }
 ```
-컴파일결과:
+컴파일결과:  
 main(String[] args)이 시작되었음.  
 firstMethod()이 시작되었음.  
 secondMethod()이 시작되었음.  
 secondMethod()이 끝났음.  
 firstMethod()이 끝났음.  
 main(String[] args)이 끝났음.  
+
+## 기본형 매개변수와 참조형 매개변수  
 
