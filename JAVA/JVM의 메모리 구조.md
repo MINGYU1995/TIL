@@ -22,3 +22,31 @@
 3.호출스택의 제일 위에 있는 메서드가 현재 실행 중인 메서드이다.  
 4.아래에 있는 메서드가 바로 위의 메서드를 호출한 메서드이다.  
  
+```java
+class CallStackTest2 {
+	public static void main(String[] args) {
+		System.out.println("main(String[] args)이 시작되었음.");
+		firstMethod();
+		System.out.println("main(String[] args)이 끝났음.");
+	}
+
+	static void firstMethod() {
+		System.out.println("firstMethod()이 시작되었음.");
+		secondMethod();
+		System.out.println("firstMethod()이 끝났음.");		
+	}
+
+	static void secondMethod() {
+		System.out.println("secondMethod()이 시작되었음.");
+		System.out.println("secondMethod()이 끝났음.");		
+	}
+}
+```
+컴파일결과:
+main(String[] args)이 시작되었음.
+firstMethod()이 시작되었음.
+secondMethod()이 시작되었음.
+secondMethod()이 끝났음.
+firstMethod()이 끝났음.
+main(String[] args)이 끝났음.
+
