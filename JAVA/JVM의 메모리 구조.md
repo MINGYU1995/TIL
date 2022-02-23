@@ -129,7 +129,86 @@ class MyMathTest3 {
 [1,2,3,4,5,6,]  
 sum=21  
 
+## ✏참조형 반환타입
+
+
+```java   
+class Data { int x; }
+
+class ReferenceReturnEx {
+	public static void main(String[] args) 
+	{
+		Data d = new Data();
+		d.x = 10;
+
+		Data d2 = copy(d); 
+		System.out.println("d.x ="+d.x);
+		System.out.println("d2.x="+d2.x);
+	}
+
+	static Data copy(Data d) {
+		Data tmp = new Data();	//새로운 객체 tmp를 생성한다. 
+		tmp.x = d.x;		//d.x의 값을 tmp.x에 복사한다.
+
+		return tmp;		// 복사한 객체의 주소를 반환한다.
+		//copy의 메서드가 종료되어도 반환된 tmp의 값은 참조변수 d2에 저장된다. tmp가 사라졌지만 d2로 새로운 객체를 다룰 수 있다.
+		
+	}
+}
+```
+컴파일결과:  
+d.x =10  
+d2.x=10  
+  
+copy메서드는 새로운 객체를 생성한 다음에, 매개변수로 넘겨받은 객체에 저장된 값을 복사해서 반환한다.  
+반환하는 값이 Data객체의 주소이므로 반환 타입이 'Data'인 것이다.  
+
+> copy 메서드의 반환타입이 'Data'이므로, 호출결과를 저장하는 변수의 타입 역시 'Data'타입의 참조 변수이어야 한다.  
+
+## ✏재귀호출(recursive call)  
+
+```java
+class FactorialTest {
+	public static void main(String args[]) {
+		System.out.println(factorial(4)); // FactorialTest.factorial(4)
+	}
+
+	static long factorial(int n) {
+		long result=0;
+
+		if (n == 1) return 1;		
+
+		return n * factorial(n-1); // ¸ 다시 메서드 자신을 호출한다.
+	}
+}
+}
+```
+컴파일결과:  
+24   
+  
+## ✏클래스 메서드(static메서드)와 인스턴스 메서드  
+  
+클래스를 정의할때, 어느 경우에 static을 사용해서 클래스 메서드로 정의 해야하는 걸까??  
+인스턴스 메서드는 인스턴스 변수와 관련된 작업을 하는, 즉 메서드의 작업을 수행하는데 인스턴스 변수를 필요로 하는 메서드이다.  
+그런데 인스턴스 변수는 인스턴스(객체)를 생성해야만 만들어지므로 인스턴스 메서드 역시 인스턴스를 생성해야마나 호출할 수 있는 것이다.  
+반면에 메서드 중에서 인스턴스와 관계없느(인스턴스 변수나 인스턴스 메서드를 사용하지 않는)메서드를 클래스 메서드(static)로 정의한다.
+
+|참고|: 클래스 영역에 선언된 변수를 멤버변수라고 함, 멤버변수 중에 static이 붙은 것은 클래스(static변수), static이 붙지 않은 것은  
+인스턴스 변수라 함, 멤버변수는 인스턴스 변수와 static변수를 모두 통칭하는 말이다.  
+
+
+### 1.클래스를 설계할 때, 멤버 변수 중 모든 인스턴스에 공통으로 사용하는 것에 static을 붙인다.  
+### 2.클래스 변수(static변수)는 인스턴스를 생성하지 않아도 사용할 수 있다.(클래스변수는 클래스가 메모리에 올라갈떄 이미 자동으로 생성되기 때문)  
+### 3.클래스 메서드(static메서드)는 인스턴스 변수를 사용 할수 없다.  
+3.1. 클래스 메서드에서 인스턴스 변수의 사용을 금지한다.반면에 인스턴스 변수나 인스턴스 메서드에서는 static이 붙은 멤버들을 사용하는 것이 언제나 가능하다.  
+### 4.메서드 내에서 인스턴스 변수를 사용하지 않는다면,static을 붙이는 것을 고려한다.  
+4.1. 인스턴스 변수를 필요로 하지 않는다면 static을 붙이자. 메서드 호출시간이 짧아지므로 성능이 향상된다. static을 안붙인 메서드는 실행 시 호출되어야할 메서드를  
+찾는 과정이 추가적으로 필요하기 때문이다.  
 
 
 
+  
+  
+   
+    
 
