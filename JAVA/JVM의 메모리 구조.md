@@ -212,9 +212,93 @@ class FactorialTest {
 > -클래스의 멤버변수 중 모든 인스턴스에 공통된 값을 유지해야하는 것이 있는지 살펴보고 있으면 static을 붙여준다.  
 > -작성한 메서드 중에서 인스턴스 변수나 인스턴스 메서드를 사용하지 않는 메서드에 static을 붙일 것 을 고려한다.  
 
+```java 
+  lass MyMath2 {
+	long a, b;
+	
+	// 인스턴스변수 a, b만을 이용해서 작업하므로 매개변수가 필요없다.
+	long add() 	    { return a + b; }  // a, b는 인스턴스변수
+	long subtract() { return a - b; }
+	long multiply() { return a * b; }
+	double divide() { return a / b; }
 
-  
-  
-   
-    
+	// 인스턴스변수와 관계없이 매개변수만으로 작업이 가능하다.
+	static long   add(long a, long b) 	   	 { return a + b; } // a, b는 지역변수
+	static long   subtract(long a, long b)   { return a - b; }
+	static long   multiply(long a, long b)	 { return a * b; }
+	static double divide(double a, double b) { return a / b; }
+}
+
+class MyMathTest2 {
+	public static void main(String args[]) {
+		// 클래스메서드 호출. 인스턴스 생성없이 호출가능
+		System.out.println(MyMath2.add(200L, 100L));
+		System.out.println(MyMath2.subtract(200L, 100L));
+		System.out.println(MyMath2.multiply(200L, 100L));
+		System.out.println(MyMath2.divide(200.0, 100.0));
+
+		MyMath2 mm = new MyMath2(); // 인스턴스를 생성
+		mm.a = 200L;
+		mm.b = 100L;
+		// 인스턴스메서드는 객체생성 후에만 호출이 가능함.
+		System.out.println(mm.add());
+		System.out.println(mm.subtract());
+		System.out.println(mm.multiply());
+		System.out.println(mm.divide());
+	}
+}
+```    
+## ✏클래스 멤버와 인스턴스 멤버간의 참조와 호출  
+
+같은 클래스에 속한 멤버들 간에는 별도의 인스턴스를 생성하지 않고도 서로 참조 또는 호출이 가능하다.단, 클래스 멤버가 인스턴스 멤버를 참조 또는 호출하고자  
+하는 경우에는 인스턴스를 생성해야 한다.*그이유는 인스턴스 멤버가 존재하는 시점에 클래스 멤버는 항상 존재하지만, 클래스멤버가 존재하는 시점에 인스턴스 멤버  
+가 존재하지 않을 수 있기 때문이다.   
+
+```java 
+lass MemberCall {
+	int iv = 10;
+	static int cv = 20;
+
+	int iv2 = cv;
+//	static int cv2 = iv;		// 에러. 클래스변수는 인스턴스 변수를 사용할 수 없음.
+	static int cv2 = new MemberCall().iv;	 // 이처럼 객체를 생성해야 사용가능.
+
+	static void staticMethod1() {
+		System.out.println(cv);
+//		System.out.println(iv); // 에러. 클래스메서드에서 인스턴스변수를 사용불가.
+		MemberCall c = new MemberCall();	
+		System.out.println(c.iv);   // 객체를 생성한 후에야 인스턴스변수의 참조가능.
+}
+
+	void instanceMethod1() {
+		System.out.println(cv);		
+		System.out.println(iv); // 인스턴스메서드에서는 인스턴스변수를 바로 사용가능.
+}
+
+	static void staticMethod2() {
+		staticMethod1();
+//		instanceMethod1(); // 에러. 클래스메서드에서는 인스턴스메서드를 호출할 수 없음.
+		MemberCall c = new MemberCall();
+		c.instanceMethod1(); // 인스턴스를 생성한 후에야 호출할 수 있음.
+ 	}
+	
+	void instanceMethod2() {	// 인스턴스메서드에서는 인스턴스메서드와 클래스메서드
+		staticMethod1();		//  모두 인스턴스 생성없이 바로 호출이 가능하다.
+		instanceMethod1();
+	}
+}
+``` 
+> 인스턴스멤버(인스턴스 변수와 인스턴스메서드)는 반드시 객체를 생성한 후에만 참조 또는 호출이 가능하기 때문에 클래스멤버가 인스턴스멤버를 참조, 호출하기 위해서  
+> 객체를 생성해야만 한다. 하지만, *인스턴스 멤버간의 호출에는 아무런 문제가 없다. 하나의 인스턴스멤버가 존재한다는 것은 인스턴스가 이미 생성되어있다는 것을  
+> 의미하며, 즉 다른 인스턴스멤버들도 모두 존재하기 때문이다. 
+
+```java
+memberCall c = new MemberCall();
+int result = c.instanceMethod1();
+//위의 두 줄을 다음과 같이 한 줄로 할 수 있다.
+int = result = new MemberCall().instanceMethod1();
+//대신 참조변수(c)를 선언하지 않았기 때문에 생성된 MemberCall 인스턴스는 더 이상 사용할 수 없다.
+``` 
+
+
 
