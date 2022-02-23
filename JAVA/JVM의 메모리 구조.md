@@ -213,7 +213,7 @@ class FactorialTest {
 > -작성한 메서드 중에서 인스턴스 변수나 인스턴스 메서드를 사용하지 않는 메서드에 static을 붙일 것 을 고려한다.  
 
 ```java 
-  lass MyMath2 {
+  class MyMath2 {
 	long a, b;
 	
 	// 인스턴스변수 a, b만을 이용해서 작업하므로 매개변수가 필요없다.
