@@ -85,7 +85,7 @@ long add(long a, long b) -  mm.add(3L, 3L)결과:6
 int add(int[] a) - mm.add(a) 결과:600  
   
 add메서드가 println메서드보다 먼저 출력되는 이유?  
-println 메서드가 결과를 출력하려면 add메서드의 결과가 먼저 계산되어야하기 때문.  
+println 메서드가 결과를 출력하려면 add메서드의 결과가 먼저 계산되어야하기 때문이다.    
 
 -----
 
