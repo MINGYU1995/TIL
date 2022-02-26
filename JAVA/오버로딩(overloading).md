@@ -14,9 +14,9 @@
   
 ### 오버로딩의 예  
 예로 가장 대표적인 것은 바로 println메서드  
-> void println(). 
-> void println(boolean x)  
-> void println(char x). 
-> void println(int x).  등  
+> void println().  
+> void println(boolean x)   
+> void println(char x).  
+> void println(int x).  등   
 
 
