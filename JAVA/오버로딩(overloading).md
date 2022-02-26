@@ -13,10 +13,27 @@
   
   
 ### 오버로딩의 예  
-예로 가장 대표적인 것은 바로 println메서드  
+예로 가장 대표적인 것은 바로 println메서드!!  
 > void println().  
 > void println(boolean x)   
 > void println(char x).  
 > void println(int x).  등   
+  
+  
+  
+보기1.  
+```java   //오버로딩x  매개변수 이름만 다를뿐 
+int add(int a, int b) {return a+b;}
+int add(int x, int y) {return x+y;}. 
+  
+  //오버로딩x return 타입만 다를경우
+int add(int a, int b) { return a+b;}
+long add(int a, int b) { return (long)(a + b);}  
+  
+  //오버로딩o 각 변수의 타입이 정의되어 있지만 서로 순서가 다르기 때문.  
+long add(int a, long b) {return a+b;}
+long add(long a, int b) {return a+b;}
+
+```
 
 
