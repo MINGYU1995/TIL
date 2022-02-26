@@ -83,16 +83,17 @@ long add(long a, int b)  - mm.add(3, 3L)결과:6
 long add(long a, int b)  - mm.add(3L, 3)결과:6  
 long add(long a, long b) -  mm.add(3L, 3L)결과:6  
 int add(int[] a) - mm.add(a) 결과:600  
+  
+add메서드가 println메서드보다 먼저 출력되는 이유?  
+println 메서드가 결과를 출력하려면 add메서드의 결과가 먼저 계산되어야하기 때문.  
 
-> add메서드가 println메서드보다 먼저 출력되는 이유?  
-> println 메서드가 결과를 출력하려면 add메서드의 결과가 먼저 계산되어야하기 때문.  
-
----  
+-----
 
 ## 가변인자(varargs)와 오버로딩  
 기존에는 메서드의 매개변수 개수가 고정적이었으나 jdk1.5부터 동적으로 지정해 줄 수 있게 되었으며,  
 이 기능을 '가변인자'라고 한다. 가변인자는 '타입... 변수명'과 같은 형식으로 선언하며, PrintStream클래스의  
-printf()가 대표적인 예이다. 
+printf()가 대표적인 예이다.  
+
 	> public PrintStream printf(String format, Object... args) {...}. 
 	
 위와 같이 가변인자 외에도 매개변수가 더 있다면, 가변인자를 매개변수 중에서 제일 마지막에 선언해야 한다.  
