@@ -83,7 +83,9 @@ long add(long a, int b)  - mm.add(3, 3L)결과:6
 long add(long a, int b)  - mm.add(3L, 3)결과:6  
 long add(long a, long b) -  mm.add(3L, 3L)결과:6  
 int add(int[] a) - mm.add(a) 결과:600  
-  
+ 
+ ---
+ 
 add메서드가 println메서드보다 먼저 출력되는 이유?  
 println 메서드가 결과를 출력하려면 add메서드의 결과가 먼저 계산되어야하기 때문이다.    
 
@@ -165,6 +167,8 @@ class VarArgsEx {
 []  
 []  
 
+---
+ 
 concatenate메서드는 매개변수로 입려된 문자열에 구분자를 사이에 포함시켜 결합해서 반환한다. 가변인자로 매개변수를 선언했기 때문에  
 문자열을 개수의 제약없이 매개변수로 지정할 수 있다.  
 
