@@ -34,8 +34,8 @@ long add(int a, int b) { return (long)(a + b);}
  //오버로딩o 각 변수의 타입이 정의되어 있지만 서로 순서가 다르기 때문.  
 long add(int a, long b) {return a+b;}
 long add(long a, int b) {return a+b;}
-
 ```
+--- 
 
 ```java
 public class OverloadingTest {
