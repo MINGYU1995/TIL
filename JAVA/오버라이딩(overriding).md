@@ -320,7 +320,7 @@ class ProductTest
 
 ---
 
-### static import문  
+## static import문  
 import문을 사용하면 클래스의 패키지명을 생략할 수 있는 것과 같이 static import문을 사용하면 static 멤버를  
 호출할 때 클래스 이름을 생략할 수 있다.특정 클래스의 static멤버를 자주 사용할 때 편리하다. 그리고 코드도 간결해짐  
 
@@ -333,12 +333,3 @@ import static java.lang.Sustem.out;   	//Systme.out을 out만으로 참조가능
 ```java 
 	System.out.println(Math.random()); --->  out.prinln(random());  
 ```
-
-
-
-
-
-
-
-
-
