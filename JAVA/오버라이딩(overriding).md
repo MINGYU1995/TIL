@@ -333,3 +333,300 @@ import static java.lang.Sustem.out;   	//Systme.out을 out만으로 참조가능
 ```java 
 	System.out.println(Math.random()); --->  out.prinln(random());  
 ```
+
+## 제어자  
+제어자는 클래스, 변수 또는 메서드의 선언부에 함께 사용되어 부가적인 의미를 부여한다.  
+제어자의 종류는 크게 접근제어자와 그 외의 제어자로 나눌 수 있다.  
+> 접근제어자 : public,protected, defalut , private. 
+> 그외	 : static,final,abstract, native '''등  
+제어자는 클래스나  멤버변수와 메서드에 주로 사용되며, 하나의 대상에 대해서 여러 제어자를 조합하여 사용하는 것이 가능하다.  
+단 , 접근 제어자는 한 번에 네 가지중 하나만 선택해서 사용할 수 있다. 즉, 하나의 대상에대해서 public과 private을 함께  
+사용할 수 없다는 것이다.  
+참고- 제어자들 간의 순서는 관계없지만 주로 접근 제어자를 제일 왼쪽에 놓은 경향이 있다.  
+
+### static - 클래스의, 공통적인  
+static은 '클래스의' 또는 공통적인'의 의미를 가지고 있다. 인스턴스 변수는 하나의 클래스로부터 생성되었더라도 각기 다른  
+값을 유지하지만, 클래스변수(static멤버변수)는 인스턴스에 관계없이 같은 값을 갖는다, 그 이유는 하나의 변수를 모든 인스턴스가  
+공유하기 때문이다.  
+static이 붙은 멤버변수와 메서드, 그리고 초기화블럭은 인스턴스가 아닌 클래스에 관계된 것이기 때문에 인스턴스를 생성하지 않고도  
+사용할 수 있다.   
+인스턴스 메서드와 static메서드의 근본적인 차이는 메서드 내에서 인스턴스 멤버를 사용하는가의 여부에 있다.  
+> static이 사용될수 있는 곳 - 멤버변수, 메서드 ,초기화 블럭   
+  
+static의 멤버변수는 1.모든 인스턴스에 공통적으로 사용되는 클래스 변수가 된다.   
+		 2.클래스변수 인스턴스를 생성하지 않고도 사용 가능하다.   
+		 3.클래스가 메모리에 로드될때 생성된다  
+		 
+static의 메서드는 1.인스턴스를 생성하지 않고도 호출이 가능한 static 메서드가 된다.  
+	        2.static메서드 내에서는 인스턴스멤버들을 직접 사용할 수 없다.  
+		
+tip: 인스턴스 멤버를 사용하지 않는 메서드는 static을 붙여서 static메서드로 선언하는 것을 고려해보도록하자.  
+가능하다면 static메서드로 하는 것이 인스턴스를 생성하지 않고도 호출이 가능해서 더 편리하고 속도도 더 빠르다.  
+
+```java 
+	class StaticTest {
+		static int width = 200; //클래스 변수  
+		
+		static {		//클래스 초기화 블럭  
+			//static변수의 복잡한 초기화 수행 	
+		}
+		
+		static int max(int a, int b) {	//클래스 
+			return a > b ? a : b; 
+		}
+	}
+```
+
+### final - 마지막의, 변경될 수 없는  
+final은 마지막의 또는 변경될 수 없는' 의 의미를 가지고 있으며 거의 모든 대상에 사용될 수 있다.(상수)  
+메서드에 사용되면 오버라이딩을 할 수 없게 되고 클래스에 사용되면 자신을 확장하는 자손클래스를 정의하지 못하게 된다.  
+
+> final이 사용될 수 있는 곳 - 클래스 , 메서드, 멤버변수, 지역변수  
+
+```java 	
+	final class FinalTest { 	//조상이 될수 없는 클래스  
+		final int MAX_SIZE = 10; 	//값을 변경할 수 없는 멤버변수  
+		
+		final void getMaxSize() { 	//오버라이딩 할 수 없는 메서드  
+		 	final int LV = MAX_SIZE; //값을 변경할수 없는 지역변수(상수)  
+			retrun MAX_SIZE;  
+			}
+		}
+```
+final이 붙은 변수는 상수이므로 일반적으로 선언과 초기화를 동시에 하지만, 인스턴스 변수의 경우 생성자에서 초기화 되도록 할 수 있다.  
+
+예를 들어 카드의 경우, 각 카드마다 다른 종류와 숫자를 갖지만, 일단 카드가 생성되면 카드의 값이 변경되어서는 안된다, 52장의 카드 중에서  
+하나만 바꿔도 같은 카드가 2장이 되는 일이 생기기 때문이다. 그래서 카드의 값을 바꾸기 보다는 카드의 순서를 바꾸는 쪽이 더 안전한 방법이다.  
+
+
+```java 
+class Card {
+	final int NUMBER;		// 상수지만 선언과 함께 초기화 하지 않고
+	final String KIND;		// 생성자에서 단 한번만 초기화할 수 있다.
+	static int width  = 100;	
+	static int height = 250;
+
+	Card(String kind, int num) {	
+		KIND = kind;		//매개변수로 넘겨 받은 값으로 KIND와 NUMBER를 초기화한다.  
+		NUMBER = num;
+	}
+
+	Card() {
+		this("HEART", 1);
+	}
+
+	public String toString() {
+		return KIND +" "+ NUMBER;
+	}
+}
+
+class FinalCardTest {
+	public static void main(String args[]) {
+		Card c = new Card("HEART", 10);
+//		c.NUMBER = 5;		<- 에러! cannot assign a value to final variable NUMBER
+		System.out.println(c.KIND);
+		System.out.println(c.NUMBER);
+		System.out.println(c); // System.out.println(c.toString());
+	}
+}
+```
+실행결과:  
+HEART  
+10  
+HEART 10  
+
+---
+
+### abstract - 추상의 , 미완성의  
+abstract는 미완성의 의미를 가지고 있다. 메서드의 선언부만 작성하고 실제 수행내용은 구현하지 않은 추상 메서드를 선언하는데 사용된다.  
+
+> abstract가 사용될 수 있는 곳 - 클래스, 메서드  
+
+abstract제어자의 클래스는 클래스 내에 추상메서드가 선언되어 있음을 의미한다.  
+abstract제어자의 메서드는 선언부만 작성하고 구현부는 작성하지 않은 추상 메서드임을 알린다.  
+
+```java 
+	abstract class AbstractTest {		//추살 클래스(추상 메서드를 포함한 클래스  
+		abstarct void move(); 		//추상 메서드(구현부가 없는 메서드)  
+	}	
+```
+
+## 접근 제어자  
+접근제어자는 멤버 또는 클래스에 사용되어, 해당하는 멤버 또는 클래스를 외부에서 접근하지 못하도록 제한 하는 역할을 한다.  
+> 접근제어자가 사용될 수 있는 곳 - 클래스, 메서드, 멤버변수, 생성자  
+> private 같은 클래스 내에서만 접근이 가능하다.  
+> default 같은 패키지 내에서만 접근이 가능하다.  
+> protected 같은 패키지 내에서, 그리고 다른 패키지의 자손 클래스에서 접근이 가능하다.  
+> public 접근 제한이 전혀 없다.  
+
+접근 범위가 넓은 쪽에서 좁은 쪽의 순으로 왼쪽부터 나열하면 다음과 같다.  
+> public > protected > (default) > private  
+
+
+#### 접근 제어자를 이용한 캡슐화  
+클래스나 멤버, 주로 멤버에 접근 제어자를 사용하는 이유는 클래스의 내부에 선언된 데이터를 보호하기 위해서이다.  
+> 접근 제어자를 사용하는 이유  
+> - 외부로부터 데이터를 보호하기 위해서  
+> - 외부에는 불필요한, 내부적으로만 사용되는 , 부분을 감추기 위해서  
+
+```java 
+	public class Time {
+		public int hour; 
+		public int minute;
+		public int second;
+	}
+```
+이 클래스의 인스턴스를 생성한 다음, 멤버변수에 직접 접근하여 값을 변경할 수 있을 것이다.  
+
+Time t = new Time();
+t.hour = 25;   
+
+멤버변수 hour는 0보다 같거나 크고 24보다는 작은 범위의 값을 가져야 하지만 위의 코드에서처럼  
+잘못된 값을 지정한다고 해도 이것을 막을 방법이 없다.  
+이런 경우 멤버변수를 privated이나 protected로 제한하고 멤버변수의 값을 읽고 변경할 수 있는  
+public메서드를 제공함으로써 간접적으로 멤버변수의 값을 다룰 수 있도록 하는 것이 바람직하다.  
+
+```java
+package javatest;
+
+public class ProductTest{ 
+    public static void main(String[] args) 
+    { 
+          Time t = new Time(12, 35, 30); 
+          System.out.println(t); 
+          
+//        t.hour = 13;	//타임 클래스의 멤버변수를 private으로 했기 때문에 오류 
+          t.setHour(t.getHour()+1);   // 현재시간보다 1시간 후로 변경한다. 
+          System.out.println(t);      // System.out.println(t.toString());과 같다.
+    } 
+}
+
+class Time { 
+    private int hour; 
+    private int minute; 
+    private int second; 
+
+    Time(int hour, int minute, int second) { 
+          setHour(hour); 
+          setMinute(minute); 
+          setSecond(second); 
+    } 
+
+    public int getHour() { return hour; } 
+    
+    public void setHour(int hour) { 
+          if (hour < 0 || hour > 23) return; 
+          this.hour = hour; 
+    } 
+    
+    public int getMinute() { return minute; } 
+    
+    public void setMinute(int minute) { 
+          if (minute < 0 || minute > 59) return; 
+          this.minute = minute; 
+    } 
+    public int getSecond() { return second; } 
+    
+    public void setSecond(int second) { 
+          if (second < 0 || second > 59) return; 
+          this.second = second; 
+    } 
+    public String toString() { 
+          return hour + ":" + minute + ":" + second; 
+    } 
+} 
+```
+#### 생성자의 접근제어자  
+생성자에 접근 제어자를 사용함으로써 인스턴ㅅ의 생성을 제한할 수 있다, 보통 생성자의 접근 제어자는 클래스의 접근 제어와 같지만, 다르게 지정할 수 도 있다.  
+생성자의 접근 제어자를 private으로 지정하면, 외부에서 생성자에 접근할 수 없으므로 인스턴스를 생성할 수 없게 된다. 그래도 클래스 내부에서는 인스턴스를  
+생성할수 있다.  
+
+```java
+	class SingleTon {
+		private Singleton() {
+		'''
+			}
+		}
+```
+대신 인스턴스를 생성해서 반환해주는 public메서드를 제공함으로써 외부에서 이 클래스의 인스턴스를 사용하도록  
+할수 있다. 이 메서드는 public인 동시에 static이어야 한다.  
+
+```java 
+	class Singleton {
+		private static Singleton s = new Singleton();  //getinstance() 에서 사용될 수 있도로고 인스턴스가 미리 생성되어야 하므로 static이어야 한다.  
+		
+		
+		private Singleton() {
+		'''
+		}
+		//인스턴스를 생성하지 않고도 호출할 수 있어야 하므로 static이어야 한다. 
+		public static Singleton getInstance() {
+			return s;
+		}
+		'''
+	}
+```
+이처럼 생성자를 통해 직접 인스턴스를 생성하지 못하게 하고 public메서드를 통해 인스턴스에 접근하게 함으로써 사용할 수 있는 인스턴스의  
+개수를 제한 할 수 있다.  
+또 한가지, 생성자가 private인 클래스는 다른 클래스의 조상이 될 수 없다. 왜냐면, 자손 클래스의 인스턴스를 생성할 때 조상클래스의 생성자를  
+호출해야만 하는데, 생성자의 접근 제어자가 private이므로 자손클래스에서 호출하는 것이 불가능하기 때문이다.  
+그래서 final을 더 추가하여 상속할 수 없는 클래스란느 것을 알리는 것이 좋겠다.  
+
+```java 
+	public final class Math {
+		private Math() {}
+		'''
+	}
+```
+Math클래스는 몇개의 상수와 static메서드만으로 구성되어 있기 때문에 인스턴스를 생성할 필요가 없다.  
+그래서 외부로부터의 불필요한 접근을 막히위해 다음과 같이 생성자의 접근 제어자를 private으로 지정했다.  
+
+
+```java
+final class Singleton {
+	private static Singleton s = new Singleton();
+	
+	private Singleton() {
+		//...
+	}
+
+	public static Singleton getInstance() {
+		if(s==null) {
+			s = new Singleton();
+		}
+		return s;
+	}	
+
+	//...
+}
+
+class SingletonTest {
+	public static void main(String args[]) {
+//		Singleton s = new Singleton();		//에러 Singleton()has private access
+		Singleton s = Singleton.getInstance();
+	}
+}
+```
+---
+
+### 제어자의 조합  
+제어자가 사용될수있는 대상을 중심으로 제어자를 정리해봤다. 제어자의 기본적인 의미와 그 대상에 따른 의미 변화를 다시 한 번 되새겨 보도록하자.  
+
+클래스 : pulbic, (default), final, abstract  
+메서드 : 모든 접근 제어자, final, abstract, static.  
+멤버변수 : 모든 접근 제어자, final , static. 
+지역변수 : final  
+
+마지막으로 제어자를 조합해서 사용할 떄 주의 사항에 대해 정리해 봤다.  
+> 1.메서드에 static과 abstract를 함께 사용할 수 없다.  
+> static메서드는 몸통이 있는 메서드에만 사용할 수 있기 때문  
+> 2.클래스에 abstract와 final 을 동시에 사용할 수 없다.  
+> 클래스에 사용되는 final은 클래스를 확장할 수 없다는 의미이고 abstract는 상속을 통해서  
+> 완서되어야 하는 의미 이기 때문에 서로 모순된다고 볼수있다.  
+> 3.abstract메서드의 접근 제어자가 private일 수 없다.  
+> abstract메서드는 자손 클래스에서 구현해 주어야 하는데 접근 제어자가 private이면,  
+> 자손 클래스에서 접근할 수 없기 때문이다.  
+> 4.메서드에 private과 final을 같이 사용할 필요는 없다.  
+> 접근 제어자가 private인 메서드는 오버라이딩될 수 없기 때뭉니다.이 둘 중 하나만 사용해도 의미가 충분하다.  
+
+# 끝
