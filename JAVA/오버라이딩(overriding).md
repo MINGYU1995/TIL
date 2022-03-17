@@ -333,6 +333,7 @@ import static java.lang.Sustem.out;   	//Systme.out을 out만으로 참조가능
 ```java 
 	System.out.println(Math.random()); --->  out.prinln(random());  
 ```
+---
 
 ## 제어자  
 제어자는 클래스, 변수 또는 메서드의 선언부에 함께 사용되어 부가적인 의미를 부여한다.  
