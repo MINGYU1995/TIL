@@ -1,5 +1,5 @@
-
---java
+## 값을 입력받아서 배열의 숫자와 같으면 0으로 만들기 게임
+```java
 ackage com.bit;
 import java.util.*;
 
@@ -56,4 +56,4 @@ public class ArrayStudy {
 	}
 
 }
---
+```
